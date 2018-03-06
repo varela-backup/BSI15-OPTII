@@ -1,0 +1,16 @@
+div.window {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #D4D4D4;
+    opacity: 0;
+    visibility: hidden;
+    transition: 300ms
+}
+
+div.window.open {
+    opacity: 1;
+    visibility: visible
+}
