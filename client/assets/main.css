@@ -1,3 +1,14 @@
+html,
+body {
+    margin: 0;
+    padding: 0
+}
+
+* {
+    font-size: 2vw;
+    box-sizing: border-box
+}
+
 div.window {
     width: 100vw;
     height: 100vh;
@@ -13,4 +24,27 @@ div.window {
 div.window.open {
     opacity: 1;
     visibility: visible
+}
+
+div.window.cadastro .component-phone .item {
+    background: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1vw
+}
+
+div.window.cadastro .component-phone * {
+    flex-grow: 1
+}
+
+div.window.cadastro .component-phone input {
+    flex-grow: 2
+}
+
+div.window.cadastro .component-phone input,
+div.window.cadastro .component-phone button {
+    height: 4vw;
+    border: 0 none;
+    padding: 1vw
 }
