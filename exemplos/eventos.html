@@ -15,6 +15,11 @@
 </head>
 
 <body>
+    <form>
+        <input name="dado">
+        <button>Send</button>
+    </form>
+    
     <div>
         AAA
         <div>
@@ -24,22 +29,41 @@
             </div>
         </div>
     </div>
+
     <script>
-        const divA = document.querySelector('div:nth-child(1)')
+        const form = document.querySelector('form')
+
+        form.addEventListener('submit', function(ev){
+            ev.preventDefault()
+            console.log(ev)
+        }, false)
+
+        // ao clicar no divC e o texto do input for "daniel"
+        // disparar um evento customizavel dizendo: 
+        // oi! eu sou um evento cutomizado!
+        // --------------------------------------------------
+        // new CustomEvent
+        // dispatchEvent
+        // addEventListener
+
+        // ---------------------------------------------------------
+
+        const divA = document.querySelector('div')
         const divB = divA.querySelector('div')
         const divC = divB.querySelector('div')
-        
+
         divA.addEventListener('click', ev => {
             ev.stopImmediatePropagation()
             alert('div A')
         }, true)
 
         divB.addEventListener('click', ev => {
-            alert('div B')
+            // alert('div B')
         }, true)
-        
+
         divC.addEventListener('click', ev => {
-            alert('div C')
+            // alert('div C')
+            console.log(ev)
         }, true)
     </script>
 </body>
