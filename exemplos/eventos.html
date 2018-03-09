@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Page Title</title>
+    <style>
+        div {
+            font-size: 6vw;
+            color: white;
+            background: rgba(0, 0, 0, .5);
+            padding: 5vw;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        AAA
+        <div>
+            BBB
+            <div>
+                CCC
+            </div>
+        </div>
+    </div>
+    <script>
+        const divA = document.querySelector('div:nth-child(1)')
+        const divB = divA.querySelector('div')
+        const divC = divB.querySelector('div')
+        
+        divA.addEventListener('click', ev => {
+            ev.stopImmediatePropagation()
+            alert('div A')
+        }, true)
+
+        divB.addEventListener('click', ev => {
+            alert('div B')
+        }, true)
+        
+        divC.addEventListener('click', ev => {
+            alert('div C')
+        }, true)
+    </script>
+</body>
+
+</html>

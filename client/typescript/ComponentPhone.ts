@@ -14,6 +14,10 @@ export class ComponentPhone {
 
     private atachEvents() {
         this.addButton.addEventListener('click', ev => {
+            if (this.firstElementInputPhone.value.trim() == "") {
+                return
+            }
+
             var itemCloned = <HTMLDivElement>this.firstElementItem.cloneNode(true)
             this.elementRoot.insertBefore(itemCloned, this.firstElementItem)
             this.firstElementInputPhone.value = ""
