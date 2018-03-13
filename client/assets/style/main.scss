@@ -1,0 +1,70 @@
+html,
+body {
+    margin: 0;
+    padding: 0
+}
+
+* {
+    font-size: 2vw;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+div.window {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #424443;
+    opacity: 0;
+    visibility: hidden;
+    transition: 300ms;
+
+    &.open {
+        opacity: 1;
+        visibility: visible
+    }
+
+    &.cadastro {
+        .perfil {
+            .thumb {
+                width: 10vw;
+                height: 10vw;
+                background-image: url(https://scontent.ffln5-1.fna.fbcdn.net/v/t1.0-9/29176824_1976892279028007_4312322013302620160_n.jpg?oh=aba7b072417a25f4471efe52522530c6&oe=5B35E7F7);
+                background-size: cover;
+            }
+        }
+
+        .component-phone {
+            * {
+                flex-grow: 1
+            }
+        
+            .item {
+                color: #D4D4D4;
+                font-weight: 300;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 1vw
+            }
+
+            label {
+                text-align: right;
+                margin-right: 1vw
+            }
+
+            input {
+                flex-grow: 10
+            }
+
+            input,
+            button {
+                height: 4vw;
+                border: 0 none;
+                padding: 1vw
+            }
+        }
+    }
+}
