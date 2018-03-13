@@ -37,34 +37,39 @@ div.window {
         }
 
         .component-phone {
-            * {
-                flex-grow: 1
-            }
-        
-            .item {
-                color: #D4D4D4;
-                font-weight: 300;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: 1vw
-            }
+            // ...
+            color: red    
+        }
 
-            label {
-                text-align: right;
-                margin-right: 1vw
-            }
+        * {
+            flex-grow: 1
+        }
+    
+        .item {
+            color: #D4D4D4;
+            font-weight: 300;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1vw
+        }
 
-            input {
-                flex-grow: 10
-            }
+        label {
+            text-align: right;
+            margin-right: 1vw;
+            flex: none;
+            width: 10vw;
+        }
 
-            input,
-            button {
-                height: 4vw;
-                border: 0 none;
-                padding: 1vw
-            }
+        input {
+            flex-grow: 10
+        }
+
+        input,
+        button {
+            height: 4vw;
+            border: 0 none;
+            padding: 1vw
         }
     }
 }
