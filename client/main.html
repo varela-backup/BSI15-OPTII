@@ -17,18 +17,21 @@
 
                 </div>
                 <div class="display">
-                    <div class="nome-apelido">??????, apelido</div>
+                    <div class="nome-apelido">
+                        <span data-anchor="nome"></span>, 
+                        <span data-anchor="apelido"></span>
+                    </div>
                     <div class="email">email</div>
                     <div class="telefones">telefones, ????, ????</div>
                 </div>
             </div>
             <div class="item">
                 <label>Nome</label>
-                <input>
+                <input data-reference="nome">
             </div>
             <div class="item">
                 <label>Apelido</label>
-                <input>
+                <input data-reference="apelido">
             </div>
             <div class="item">
                 <label>E-Mail</label>
@@ -50,6 +53,23 @@
     </div>
 
     <script data-main="assets/main" src="assets/vendor/require.js"></script>
+    <script>
+        (function(){
+            var references = document.querySelectorAll('[data-reference]')
+            // var anchors = document.querySelectorAll('[data-anchor]');
+
+            references.forEach(reference => {
+                var anchor = document.querySelector('[data-anchor='+ reference.dataset.reference +']')
+
+                if (!anchor) 
+                    return
+
+                reference.addEventListener('keydown', ev => {
+                    anchor.innerText = reference.value
+                })
+            })
+        })()
+    </script>
 </body>
 
 </html>
