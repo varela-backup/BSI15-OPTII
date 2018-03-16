@@ -61,7 +61,7 @@
                 var anchor = document.querySelector('[data-anchor='+ reference.dataset.reference +']')
                 if (!anchor) 
                     return
-                reference.addEventListener('keydown', ev => {
+                reference.addEventListener('keyup', ev => {
                     anchor.innerText = reference.value
                 })
             })
