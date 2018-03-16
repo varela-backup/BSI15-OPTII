@@ -1,3 +1,6 @@
+$color-font-default: #D4D4D4;
+$size-label-default: 10vw;
+
 html,
 body {
     margin: 0;
@@ -28,16 +31,28 @@ div.window {
 
     &.cadastro {
         .perfil {
-            .thumb {
-                width: 10vw;
-                height: 10vw;
-                background-image: url(https://scontent.ffln5-1.fna.fbcdn.net/v/t1.0-9/29176824_1976892279028007_4312322013302620160_n.jpg?oh=aba7b072417a25f4471efe52522530c6&oe=5B35E7F7);
-                background-size: cover;
+            .preview {
+                padding: 1vw $size-label-default;
+                display: flex;
+                color: $color-font-default;
+
+                .thumb {
+                    flex: none;
+                    width: 10vw;
+                    height: 10vw;
+                    background: {
+                        image: url(https://scontent.ffln5-1.fna.fbcdn.net/v/t1.0-9/29176824_1976892279028007_4312322013302620160_n.jpg?oh=aba7b072417a25f4471efe52522530c6&oe=5B35E7F7);
+                        size: cover;
+                    }
+                }
+
+                .display {
+                    padding: 1vw;
+                }
             }
         }
 
         .component-phone {
-            // ...
             color: red    
         }
 
@@ -46,7 +61,7 @@ div.window {
         }
     
         .item {
-            color: #D4D4D4;
+            color: $color-font-default;
             font-weight: 300;
             display: flex;
             justify-content: center;
@@ -58,7 +73,7 @@ div.window {
             text-align: right;
             margin-right: 1vw;
             flex: none;
-            width: 10vw;
+            width: $size-label-default;
         }
 
         input {
