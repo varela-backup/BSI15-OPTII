@@ -21,8 +21,8 @@
                         <span data-anchor="nome"></span>, 
                         <span data-anchor="apelido"></span>
                     </div>
-                    <div class="email">email</div>
-                    <div class="telefones">telefones, ????, ????</div>
+                    <div data-anchor="email" class="email">email</div>
+                    <div data-anchor="telefone" class="telefones">telefones, ????, ????</div>
                 </div>
             </div>
             <div class="item">
@@ -35,14 +35,14 @@
             </div>
             <div class="item">
                 <label>E-Mail</label>
-                <input>
+                <input data-reference="email">
             </div>
         </div>
 
         <div class="component component-phone">
             <div class="item">
                 <label for="">Telefone</label>
-                <input name="number" type="text">
+                <input data-reference="telefone" name="number" type="text">
                 <button class="button-add">+</button>
             </div>
         </div>
@@ -57,13 +57,10 @@
         (function(){
             var references = document.querySelectorAll('[data-reference]')
             // var anchors = document.querySelectorAll('[data-anchor]');
-
             references.forEach(reference => {
                 var anchor = document.querySelector('[data-anchor='+ reference.dataset.reference +']')
-
                 if (!anchor) 
                     return
-
                 reference.addEventListener('keydown', ev => {
                     anchor.innerText = reference.value
                 })
