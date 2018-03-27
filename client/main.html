@@ -10,6 +10,8 @@
 </head>
 
 <body>
+    <div class="loading"></div>
+
     <div class="window cadastro" id="janela-1">
         <div class="perfil">
             <div class="preview">
@@ -18,7 +20,7 @@
                 </div>
                 <div class="display">
                     <div class="nome-apelido">
-                        <span data-anchor="nome"></span>, 
+                        <span data-anchor="nome"></span>,
                         <span data-anchor="apelido"></span>
                     </div>
                     <div data-anchor="email" class="email">email</div>
@@ -27,15 +29,15 @@
             </div>
             <div class="item">
                 <label>Nome</label>
-                <input data-reference="nome">
+                <input class="name" data-reference="nome">
             </div>
             <div class="item">
                 <label>Apelido</label>
-                <input data-reference="apelido">
+                <input class="nickname" data-reference="apelido">
             </div>
             <div class="item">
                 <label>E-Mail</label>
-                <input data-reference="email">
+                <input class="email" data-reference="email">
             </div>
         </div>
 
@@ -46,6 +48,10 @@
                 <button class="button-add">+</button>
             </div>
         </div>
+
+        <div>
+            <button class="enviar-dados">salvar</button>
+        </div>
     </div>
 
     <div class="window" id="janela-2">
@@ -54,18 +60,64 @@
 
     <script data-main="assets/main" src="assets/vendor/require.js"></script>
     <script>
-        (function(){
-            var references = document.querySelectorAll('[data-reference]')
-            // var anchors = document.querySelectorAll('[data-anchor]');
-            references.forEach(reference => {
-                var anchor = document.querySelector('[data-anchor='+ reference.dataset.reference +']')
-                if (!anchor) 
-                    return
-                reference.addEventListener('keyup', ev => {
-                    anchor.innerText = reference.value
+        var divLoading = document.querySelector('div.loading')
+        
+        
+        class WindowCadastro {
+            constructor() {
+                if (WindowCadastro.instance)
+                    return WindowCadastro.instance
+                WindowCadastro.instance = this
+                
+                this.container = document.querySelector(".window.cadastro")
+                this.attachPhoneEvents()
+                this.updateUserInfoPreview()
+            }
+
+            updateUserInfoPreview() {
+                var references = this.container.querySelectorAll('[data-reference]')
+                // var anchors = document.querySelectorAll('[data-anchor]');
+                references.forEach(reference => {
+                    var anchor = document.querySelector('[data-anchor=' + reference.dataset.reference + ']')
+                    if (!anchor)
+                        return
+                    reference.addEventListener('keyup', ev => {
+                        anchor.innerText = reference.value
+                    })
                 })
-            })
-        })()
+            }
+
+            attachPhoneEvents() {
+                var btEnviar = this.container.querySelector(".enviar-dados")
+                var inName = this.container.querySelector("input.name")
+                var inNickname = this.container.querySelector("input.nickname")
+                var inEmail = this.container.querySelector("input.email")
+                var ajax = null
+
+                btEnviar.addEventListener('click', ev => {
+                    if (ajax) {
+                        ajax.abort()
+                    }
+                    divLoading.classList.add('open')
+                    var data = {}
+                    var inPhones = this.container.querySelectorAll("[name=number]")
+                    data.name = inName.value.trim()
+                    data.nickname = inNickname.value.trim()
+                    data.email = inEmail.value.trim()
+                    data.phones = []
+                    inPhones.forEach(inPhone => {
+                        data.phones.push(inPhone.value.trim())
+                    })
+                    ajax = new XMLHttpRequest()
+                    ajax.open("POST", "http://127.0.0.1:80/pessoa", true)
+                    // ajax.setRequestHeader("Content-type", "application/json")
+                    ajax.addEventListener('load', ev => divLoading.classList.remove('open'))
+                    ajax.send(JSON.stringify(data))
+                })
+            }
+        }
+
+        new WindowCadastro()
     </script>
 </body>
 
