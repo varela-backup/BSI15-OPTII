@@ -91,11 +91,8 @@
                 var inNickname = this.container.querySelector("input.nickname")
                 var inEmail = this.container.querySelector("input.email")
                 var ajax = null
-
                 btEnviar.addEventListener('click', ev => {
-                    if (ajax) {
-                        ajax.abort()
-                    }
+                    if (ajax) ajax.abort()
                     divLoading.classList.add('open')
                     var data = {}
                     var inPhones = this.container.querySelectorAll("[name=number]")
@@ -103,9 +100,7 @@
                     data.nickname = inNickname.value.trim()
                     data.email = inEmail.value.trim()
                     data.phones = []
-                    inPhones.forEach(inPhone => {
-                        data.phones.push(inPhone.value.trim())
-                    })
+                    inPhones.forEach(inPhone => data.phones.push(inPhone.value.trim()))
                     ajax = new XMLHttpRequest()
                     ajax.open("POST", "http://127.0.0.1:80/pessoa", true)
                     // ajax.setRequestHeader("Content-type", "application/json")

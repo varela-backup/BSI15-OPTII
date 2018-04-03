@@ -3,7 +3,12 @@ return new class {
     private $pdo;
 
     function __construct() {       
-        $this->pdo = new PDO('mysql:host=localhost;dbname=agenda', "root", "", [PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8']);
+        $this->pdo = new PDO(
+            "mysql:host=localhost;dbname=agenda", 
+            "root", 
+            "",
+            [PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8']
+        );
     }
 
     function select() {
@@ -11,5 +16,13 @@ return new class {
         $sth->execute(["id"=>1]);
         $result = $sth->fetchAll();
         print_r($result);
+    }
+
+    function insert($table, $data) {
+        $columnNames = implode(", ", array_keys($data));
+        $columnValuesRef = ":" . implode(", :", array_keys($data));
+        $sth = $this->pdo->prepare("INSERT INTO $table($columnNames) VALUES($columnValuesRef)");
+        $sth->execute($data);
+        return $this->pdo->lastInsertId();
     }
 };
