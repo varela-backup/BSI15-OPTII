@@ -12,6 +12,15 @@
 <body>
     <div class="loading"></div>
 
+    <div class="window lista" id="janela-2">
+        <div class="item">
+            <div class="nome">Teste</div>
+            <div class="apelido">Apelido</div>
+            <div class="email">Apelido@assd.com</div>
+            <div class="telefones"></div>
+        </div>
+    </div>
+
     <div class="window cadastro" id="janela-1">
         <div class="perfil">
             <div class="preview">
@@ -54,14 +63,30 @@
         </div>
     </div>
 
-    <div class="window" id="janela-2">
-        teste JANELA 2
-    </div>
-
     <script data-main="assets/main" src="assets/vendor/require.js"></script>
     <script>
         var divLoading = document.querySelector('div.loading')
- 
+
+        const windowLista = document.querySelector('div.window.lista')
+        var itemLista = windowLista.querySelector('.item')
+
+        async function buscaContatos() {
+            var resposta = await fetch('http://127.0.0.1:80/pessoa')
+            var dados = await resposta.json()
+            var itemAtual = itemLista
+            dados.forEach(pessoa => {
+                itemAtual.querySelector('.nome').innerText = pessoa.nome
+                itemAtual.querySelector('.apelido').innerText = pessoa.apelido
+                itemAtual.querySelector('.email').innerText = pessoa.email
+                var telefones = itemAtual.querySelector('.telefones')
+                pessoa.telefones.forEach(telefone => {
+                    telefones.innerText += telefone + " / "
+                })
+                itemAtual = itemLista.cloneNode(true)
+                windowLista.appendChild(itemAtual)
+            })
+        }
+
         class WindowCadastro {
             constructor() {
                 if (WindowCadastro.instance)
@@ -110,7 +135,7 @@
             }
         }
 
-        new WindowCadastro()
+        var wc = new WindowCadastro()
     </script>
 </body>
 

@@ -36,11 +36,35 @@ return new class implements RestObject {
     }
 
     function get($query) {
-        echo json_encode([
-            "nome" => "Daniel de Andrade Varela",
-            "dataNasc" => "1986-07-07",
-            "args" => $query
-        ]);    
+        return [
+            [
+                "nome" => "Daniel de Andrade Varela",
+                "apelido" => "Drache Havoc",
+                "email" => "assassinhora@dunha.com",
+                "telefones" => [
+                    '1111',
+                    '2222'
+                ]
+            ],
+            [
+                "nome" => "Daniel de Andrade Varela",
+                "apelido" => "Drache Havoc",
+                "email" => "assassinhora@dunha.com",
+                "telefones" => [
+                    '1111',
+                    '2222'
+                ]
+            ],
+            [
+                "nome" => "Daniel de Andrade Varela",
+                "apelido" => "Drache Havoc",
+                "email" => "assassinhora@dunha.com",
+                "telefones" => [
+                    '1111',
+                    '2222'
+                ]
+            ],
+        ];    
     }
 
     function delete($query) {
