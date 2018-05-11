@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<div class="nome">nome</div>
+	<div class="telefone">telefone</div>
+	<div class="color">red</div>
+
+	<script>
+		let domColor = document.querySelector('.color')
+
+		let cnf = {
+			childList: true,
+			attributes: true,
+			characterData: true,
+			subtree: true,
+			attributeOldValue: true,
+			characterDataOldValue: true,
+			// attributeFilter: [],
+		}
+
+		let mo = new MutationObserver(mutations => {
+			mutations.forEach(mutation => {
+				if (mutation.type == "characterData")
+					document.body.style.backgroundColor = domColor.innerText
+			})
+		});
+
+		mo.observe(domColor, cnf)
+
+		class Manipulador {
+			constructor() {
+				this.domNome = document.querySelector('.nome')
+				this.domTelefone = document.querySelector('.telefone')
+			}
+
+			get nome() {
+				return this.domNome.innerText
+			}
+
+			set nome(value) {
+				this.domNome.innerText = value
+			}
+
+			get telefone() {
+				return this.domTelefone.innerText
+			}
+
+			set telefone(value) {
+				this.domTelefone.innerText = value
+			}
+		}
+
+		var man = new Manipulador()
+
+
+	</script>
+</body>
+</html>
