@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <input id="name">
+    <input id="phone">
+    <input id="nickname">
+
+    <script>
+        $ = document.querySelector.bind(document)
+        $$ = document.querySelectorAll.bind(document)
+
+        class Handler {
+            constructor() {
+                this._name = $('#name')
+                this._phone = $('#phone')
+                this._nickname = $('#nickname')
+                this._attrList = [
+                    'name', 'phone', 'nickname'
+                ]
+                return new Proxy(this, this)
+            }
+
+            get (t, k, p) {
+                if (this._attrList.includes(k))
+                    return this['_'+k].value
+                return this[k]
+            }
+
+            set (t, k, v, p) {
+                if (this._attrList.includes(k))
+                    this['_'+k].value = v
+                return true
+            }
+
+            async load() {
+                let request = await fetch('data.json')
+                let data = await request.json()
+                Object.assign(this, data)
+            }
+
+            async save() {
+                let request = await fetch('save.php', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        'name': this.name,
+                        'phone': this.phone,
+                        'nickname': this.nickname,
+                    })
+                })
+                let data = await request.json()
+                // continue ...
+            }
+        }
+    </script>
+
+</body>
+
+</html>

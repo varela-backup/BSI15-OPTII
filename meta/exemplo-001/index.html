@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <input id="name">
+    <input id="phone">
+    <input id="nickname">
+
+    <script>
+        $ = document.querySelector.bind(document)
+        $$ = document.querySelectorAll.bind(document)
+
+        class Handler {
+            constructor() {
+                this._name = $('#name')
+                this._phone = $('#phone')
+                this._nickname = $('#nickname')
+            }
+
+            get name() {
+                return this._name.value
+            }
+
+            set name(value) {
+                this._name.value = value
+            }
+
+            get phone() {
+                return this._phone.value
+            }
+
+            set phone(value) {
+                this._phone.value = value
+            }
+
+            get nickname() {
+                return this._nickname.value
+            }
+
+            set nickname(value) {
+                this._nickname.value = value
+            }
+
+            async load() {
+                let request = await fetch('data.json')
+                let data = await request.json()
+                Object.assign(this, data)
+            }
+
+            async save() {
+                let request = await fetch('save.php', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        'name': this.name,
+                        'phone': this.phone,
+                        'nickname': this.nickname,
+                    })
+                })
+                let data = await request.json()
+                // continue ...
+            }
+        }
+    </script>
+
+</body>
+
+</html>
