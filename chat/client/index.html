@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Socket</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.slim.js"></script>
+</head>
+<body>
+    
+    <button>emit</button>
+
+    <script>
+        let socket = io('http://localhost');
+        let bt = document.querySelector('button');
+
+        socket.on('xyz-client', data => {
+            console.log(data)
+        })
+
+        bt.addEventListener('click', ev => {
+            socket.emit('xyz-server', { msg: 'oi! essa é uma mensagem enviada pelo cliente.' })
+        })
+    </script>
+
+</body>
+</html>
